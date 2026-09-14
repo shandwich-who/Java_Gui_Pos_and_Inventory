@@ -45,20 +45,26 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String str_user = tf_user.getText();
                 String str_pass = String.valueOf(tf_pass.getPassword());
-                
-                // TODO: Replace with database-driven authentication
-                // SECURITY: Should validate against database with hashed passwords
-                if (str_user.equals("admin") && str_pass.equals("admin")) {
-                    JOptionPane.showMessageDialog(Login.this, "Welcome!, you are successfully login");
-                    tf_user.setText("");
-                    tf_pass.setText("");
-                    dispose();
-                    Home home = new Home();
-                    home.extend_Home();
+                if (str_user.equals("admin")) {
+                    if (str_pass.equals("admin")) {
+                        JOptionPane.showMessageDialog(new JFrame(), "Welcome!, you are successfully login");
+                        tf_user.setText("");
+                        tf_pass.setText("");
+                        dispose();
+                        Home home = new Home();
+                        home.extend_Home();
+
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(),
+                                "Sorry!, The password you have been input are no been recognized");
+
+                    }
+
                 } else {
-                    JOptionPane.showMessageDialog(Login.this,
-                            "Invalid username or password. Please try again.");
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            "Sorry! the username you've entered is invalid please check it carefully ");
                 }
+
             }
         });
 
@@ -72,14 +78,18 @@ public class Login extends JFrame {
         btn_cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int dialog = JOptionPane.showConfirmDialog(Login.this,
+
+                int dialog = JOptionPane.showConfirmDialog(new JFrame(),
                         "Are you sure you want to cancel the Operation", "Confirmation", JOptionPane.YES_NO_OPTION);
+
                 if (dialog == JOptionPane.YES_OPTION) {
                     tf_user.setText("");
                     tf_pass.setText("");
                 }
+
             }
         });
+
     }
 
     public void extend_Login() {
