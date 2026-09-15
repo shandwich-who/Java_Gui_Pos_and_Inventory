@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Path;
 import java.sql.*;
 import java.util.Vector;
 
@@ -884,7 +885,7 @@ public class Inventory extends JFrame {
         table_panel();
         data_refresh();
 
-        ImageIcon icon = new ImageIcon("inventory_icon.png");
+        ImageIcon icon = new ImageIcon(Path.of("images","inventory_icon.png").toString());
         setIconImage(icon.getImage());
 
         setResizable(false);

@@ -1,8 +1,9 @@
 package Package;
 
-import java.sql.*;
-
-import javax.swing.JFrame;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class AccessMs {
@@ -11,19 +12,30 @@ public class AccessMs {
     private Connection connect_2;
 
     public AccessMs() {
-        // TODO Auto-generated constructor stub
-
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 
-            connect_1 = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Andrei Program/Documents/Project  Gui java/Project_system/Database1.accdb");
-            connect_2 = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Andrei Program/Documents/Project  Gui java/Project_system/Database2.accdb");
+            // Absolute path calculated dynamically relative to the current working directory
+            String projectPath = new File("").getAbsolutePath();
+            
+            // Assuming your databases are located in a 'database' folder inside your project root
+            String db1Path = "jdbc:ucanaccess://" + projectPath + "/database/Database1.accdb";
+            String db2Path = "jdbc:ucanaccess://" + projectPath + "/database/Database2.accdb";
 
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(new JFrame(), e.getStackTrace());
+            connect_1 = DriverManager.getConnection(db1Path);
+            connect_2 = DriverManager.getConnection(db2Path);
 
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, 
+                "UCanAccess JDBC Driver not found.\nError: " + e.getMessage(), 
+                "Driver Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Database Connection Error:\n" + e.getMessage(), 
+                "Database Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println(e.getMessage());
         }
-
     }
 
     public Connection getConnection1() {
@@ -34,4 +46,12 @@ public class AccessMs {
         return connect_2;
     }
 
+    public void closeConnections() {
+        try {
+            if (connect_1 != null && !connect_1.isClosed()) connect_1.close();
+            if (connect_2 != null && !connect_2.isClosed()) connect_2.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
