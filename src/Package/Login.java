@@ -3,6 +3,7 @@ package Package;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Path;
 
 public class Login extends JFrame {
     private final JPanel panel = new JPanel();
@@ -93,7 +94,7 @@ public class Login extends JFrame {
     }
 
     public void extend_Login() {
-        ImageIcon icon = new ImageIcon("login_icon.png");
+        ImageIcon icon = new ImageIcon(Path.of("images","login_icon.png").toString());
         setIconImage(icon.getImage());
 
         panel.setLayout(null);

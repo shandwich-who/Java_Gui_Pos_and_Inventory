@@ -3,12 +3,13 @@ package Package;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Path;
 
 public class Home extends JFrame {
 
-    private final Icon icon_pos = new ImageIcon("pos.png");
+    private final Icon icon_pos = new ImageIcon(Path.of("images","pos.png").toString());
     private final JButton btn_pos = new JButton(icon_pos);
-    private final Icon icon_inventory = new ImageIcon("inventory.png");
+    private final Icon icon_inventory = new ImageIcon(Path.of("images","inventory.png").toString());
     private final JButton btn_inventory = new JButton(icon_inventory);
 
     public Home() {
@@ -55,7 +56,7 @@ public class Home extends JFrame {
     }
 
     public void extend_Home() {
-        ImageIcon icon = new ImageIcon("home_icon.png");
+        ImageIcon icon = new ImageIcon(Path.of("images","home_icon.png").toString());
         setIconImage(icon.getImage());
         setTitle("Home");
 

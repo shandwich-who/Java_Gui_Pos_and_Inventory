@@ -1,10 +1,10 @@
 package Package;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Path;
 import java.sql.*;
 import java.time.*;
 import java.time.format.*;
@@ -237,7 +237,7 @@ public class Pos {
 
                         JFrame sh_Frame = new JFrame("Search Item");
 
-                        ImageIcon sh_icon = new ImageIcon("search_icon.png");
+                        ImageIcon sh_icon = new ImageIcon(Path.of("images","search_icon.png").toString());
                         sh_Frame.setIconImage(sh_icon.getImage());
 
                         Object[] sh_Column = { "Item Code", "Item Description", "Price", "Size", "Stocks",
@@ -584,7 +584,7 @@ public class Pos {
                 public void run() {
                     JFrame py_Frame = new JFrame("Payment");
 
-                    ImageIcon py_icon = new ImageIcon("payment_icon.png");
+                    ImageIcon py_icon = new ImageIcon(Path.of("images","payment_icon.png").toString());
                     py_Frame.setIconImage(py_icon.getImage());
 
                     JTextField payment_tf = new JTextField();
@@ -1050,7 +1050,7 @@ public class Pos {
         pos_Table_reload();
         refresh_total();
 
-        ImageIcon imgicon = new ImageIcon("pos.png");
+        ImageIcon imgicon = new ImageIcon(Path.of("images","pos.png").toString());
         frame.setIconImage(imgicon.getImage());
 
         frame.setTitle("Sales");
